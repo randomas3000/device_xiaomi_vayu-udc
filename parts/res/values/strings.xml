@@ -100,4 +100,11 @@
     <string name="raise_to_wake_gesture_title">Raise to wake</string>
     <string name="raise_to_wake_gesture_summary">Wake up the device instead of pulsing notification</string>
     
+    <!-- Dolby Atmos -->
+    <string name="dolby_title">Dolby Atmos</string>
+    <string name="dolby_enable">Enable</string>
+    <string name="dolby_summary">Surround sound</string>
+    <string name="dolby_profile_title">Choose a profile</string>
+    <string name="dolby_profile_dynamic">Dynamic</string>
+
 </resources>
