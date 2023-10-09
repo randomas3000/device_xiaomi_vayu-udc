@@ -19,18 +19,7 @@ package org.lineageos.settings.dolby;
 import static org.lineageos.settings.dolby.DolbyAtmos.DsParam;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.media.session.MediaController;
-import android.media.session.MediaSessionManager;
-import android.media.session.PlaybackState;
-import android.os.Handler;
-import android.os.SystemClock;
-import android.os.UserHandle;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.KeyEvent;
 
 import org.lineageos.settings.R;
 
@@ -44,14 +33,11 @@ public final class DolbyUtils {
 
     private static DolbyUtils mInstance;
     private DolbyAtmos mDolbyAtmos;
-    private MediaSessionManager mMediaSessionManager;
     private Context mContext;
-    private Handler mHandler = new Handler();
 
     public DolbyUtils(Context context) {
         mContext = context;
         mDolbyAtmos = new DolbyAtmos(EFFECT_PRIORITY, 0);
-        mDolbyAtmos.setEnabled(mDolbyAtmos.getDsOn());
     }
 
     public static synchronized DolbyUtils getInstance(Context context) {
@@ -59,6 +45,12 @@ public final class DolbyUtils {
             mInstance = new DolbyUtils(context);
         }
         return mInstance;
+    }
+
+    public void onBootCompleted() {
+        Log.i(TAG, "onBootCompleted");
+        mDolbyAtmos.setEnabled(mDolbyAtmos.getDsOn());
+        mDolbyAtmos.setVolumeLevelerEnabled(false);
     }
 
     private void checkEffect() {
@@ -73,9 +65,6 @@ public final class DolbyUtils {
         checkEffect();
         Log.d(TAG, "setDsOn: " + on);
         mDolbyAtmos.setDsOn(on);
-        if (on) {
-            refreshPlaybackIfNecessary();
-        }
     }
 
     public boolean getDsOn() {
