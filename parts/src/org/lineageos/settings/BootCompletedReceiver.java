@@ -48,6 +48,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         }
         DozeUtils.checkDozeService(context);
         ThermalUtils.startService(context);
-        DolbyUtils.getInstance(context).onBootCompleted();
+        DolbyUtils.getInstance(context);
     }
 }
