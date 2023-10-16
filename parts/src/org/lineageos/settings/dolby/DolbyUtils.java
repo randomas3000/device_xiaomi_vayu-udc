@@ -52,9 +52,6 @@ public final class DolbyUtils {
         mContext = context;
         mDolbyAtmos = new DolbyAtmos(EFFECT_PRIORITY, 0);
         mDolbyAtmos.setEnabled(mDolbyAtmos.getDsOn());
-
-        // Always disable volume leveler because its broken on AOSP.
-        disableVolumeLeveler();
     }
 
     public static synchronized DolbyUtils getInstance(Context context) {
@@ -91,7 +88,6 @@ public final class DolbyUtils {
         checkEffect();
         Log.d(TAG, "setProfile: " + index);
         mDolbyAtmos.setProfile(index);
-        disableVolumeLeveler();
     }
 
     public int getProfile() {
@@ -113,12 +109,6 @@ public final class DolbyUtils {
     public void resetProfileSpecificSettings() {
         checkEffect();
         mDolbyAtmos.resetProfileSpecificSettings();
-        disableVolumeLeveler();
-    }
-
-    private void disableVolumeLeveler() {
-        Log.d(TAG, "disableVolumeLeveler");
-        mDolbyAtmos.setDapParameterBool(DsParam.VOLUME_LEVELER, false);
     }
 
     public void setPreset(String preset) {
@@ -173,5 +163,17 @@ public final class DolbyUtils {
         int amount = enabled ? mDolbyAtmos.getDapParameterInt(DsParam.STEREO_WIDENING) : 0;
         Log.d(TAG, "getStereoWideningAmount: enabled=" + enabled + " amount=" + amount);
         return amount;
+    }
+
+    public void setVolumeLevelerEnabled(boolean enable) {
+        checkEffect();
+        Log.d(TAG, "setVolumeLevelerEnabled: " + enable);
+        mDolbyAtmos.setDapParameterBool(DsParam.VOLUME_LEVELER, enable);
+    }
+
+    public boolean getVolumeLevelerEnabled() {
+        boolean enabled = mDolbyAtmos.getDapParameterBool(DsParam.VOLUME_LEVELER);
+        Log.d(TAG, "getVolumeLevelerEnabled: " + enabled);
+        return enabled;
     }
 }
