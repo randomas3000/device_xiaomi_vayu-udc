@@ -38,6 +38,7 @@ public final class DolbyUtils {
     public DolbyUtils(Context context) {
         mContext = context;
         mDolbyAtmos = new DolbyAtmos(EFFECT_PRIORITY, 0);
+        mDolbyAtmos.setEnabled(mDolbyAtmos.getDsOn());
     }
 
     public static synchronized DolbyUtils getInstance(Context context) {
@@ -45,12 +46,6 @@ public final class DolbyUtils {
             mInstance = new DolbyUtils(context);
         }
         return mInstance;
-    }
-
-    public void onBootCompleted() {
-        Log.i(TAG, "onBootCompleted");
-        mDolbyAtmos.setEnabled(mDolbyAtmos.getDsOn());
-        mDolbyAtmos.setVolumeLevelerEnabled(false);
     }
 
     private void checkEffect() {
