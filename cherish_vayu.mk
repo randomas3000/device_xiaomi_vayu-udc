@@ -33,5 +33,4 @@ BUILD_FINGERPRINT := Xiaomi/vayu_global/vayu:13/TKQ1.221013.002/V14.0.1.0.TJUMIX
 
 # cherishOS additions
 CHERISH_BUILD_TYPE := OFFICIAL
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.cherish.maintainer=randomas3000
+CHERISH_MAINTAINER := raandomas3000
