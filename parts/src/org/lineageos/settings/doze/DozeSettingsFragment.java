@@ -40,6 +40,7 @@ import org.lineageos.settings.R;
 
 public class DozeSettingsFragment extends PreferenceFragment implements OnPreferenceChangeListener,
         OnCheckedChangeListener {
+        CompoundButton.OnCheckedChangeListener {
 
     private MainSwitchPreference mSwitchBar;
 
